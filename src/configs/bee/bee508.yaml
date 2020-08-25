@@ -14,7 +14,7 @@ dataset:
   inner_fold: 0
   outer_fold: 0
   outer_only: true
-  data_dir: [../data/isic2019/ISIC_2019_Training_Input, ../data/train-512]
+  data_dir: [../data/isic2019/ISIC_2019_Training_Input, ../data/jpeg/train/]
   csv_filename: ../data/combined_train_cdeotte_nevi_meta.csv
 
 

@@ -22,8 +22,7 @@ x['anatom_site_general_challenge'] = x['anatom_site_general_challenge'].fillna('
 x['label'] = x['target']
 x['age_cat'] = [to_bins(_, borders=BORDERS) for _ in x['age_approx']]
 
-#y = pd.read_csv('../../data/isic2019/ISIC_2019_Training_GroundTruth.csv')
-y = pd.read_csv('../../data/isic2019/exclude_2019.csv')
+y = pd.read_csv('../../data/isic2019/ISIC_2019_Training_GroundTruth.csv')
 ymeta = pd.read_csv('../../data/isic2019/ISIC_2019_Training_Metadata.csv')
 y = y.merge(ymeta, on='image')
 y.loc[y['anatom_site_general'].isin(['anterior torso', 'posterior torso', 'lateral torso']), 'anatom_site_general'] = 'torso'
@@ -48,4 +47,4 @@ df = pd.concat([x,y]+[x[x['label'] == 1]]*upsample)
 df['sex'] = pd.Categorical(df['sex']).codes
 df['anatom_site_general_challenge'] = pd.Categorical(df['anatom_site_general_challenge']).codes
 
-df.to_csv('../../data/combined_train_cdeotte_meta_no2019.csv', index=False)
+df.to_csv('../../data/combined_train_cdeotte_meta.csv', index=False)

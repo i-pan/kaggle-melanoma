@@ -15,7 +15,7 @@ dataset:
   inner_fold: 0
   outer_fold: 0
   outer_only: true
-  data_dir: [../data/isic2019/ISIC_2019_Training_Input, ../data/train-512, ../data/jpeg/test]
+  data_dir: [../data/isic2019/ISIC_2019_Training_Input, ../data/jpeg/train, ../data/jpeg/test]
   csv_filename: ../data/combined_pseudolabel_3class.csv
 
 
