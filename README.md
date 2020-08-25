@@ -1,10 +1,15 @@
 # SIIM-OSIC Melanoma Classification: 2nd Place
 
 Environment:
+
 Python 3.7.7
+
 Anaconda 
+
 PyTorch 1.6
+
 4 NVIDIA Quadro RTX 6000 24GB 
+
 
 ## Setup Python environment
 ```
