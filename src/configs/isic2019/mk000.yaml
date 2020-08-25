@@ -1,0 +1,102 @@
+# NOTE: it is best to use absolute paths
+# If you must use relative paths, they are relative
+# to run.py, not the config file
+
+seed: 188 
+
+dataset:
+  name: SkinDataset
+  params:
+    flip: true
+    verbose: true
+    square: true
+    square_tta: 1
+  inner_fold: 0
+  outer_fold: 0
+  outer_only: true
+  data_dir: ../data/isic2019/ISIC_2019_Training_Input
+  csv_filename: ../data/isic2019/train_with_splits.csv
+
+
+transform:
+  augment: RandAugment
+  params:
+    n: 3
+    m: 12.0
+  num_workers: 0
+  pad_ratio: null
+  resize_to: [512, 512]
+  preprocess:
+    image_range: [0, 255]
+    input_range: [0, 1]
+    mean: [0.485, 0.456, 0.406]
+    sdev: [0.229, 0.224, 0.225]
+
+
+model:
+  name: Net2D
+  params:
+    backbone: tf_efficientnet_b6_ns
+    pretrained: true
+    num_classes: 8
+    dropout: 0.2
+    multisample_dropout: true
+
+
+find_lr: # this is its own mode 
+  params:
+    start_lr: 1.0e-7
+    end_lr: 1
+    num_iter: 500
+    save_fig: true
+
+
+train:
+  batch_size: 64
+  trainer: Trainer
+  params:
+    gradient_accumulation: 1
+    num_epochs: 20
+    steps_per_epoch: 0
+    validate_interval: 5
+    verbosity: 100
+    amp: true
+
+
+evaluation:
+  batch_size: 1
+  evaluator: Evaluator
+  params:
+    save_checkpoint_dir: ../checkpoints/isic2019/mk000
+    save_best: true
+    prefix: effnet
+    metrics: [mel_auc, mel_f1, accuracy, auc]
+    valid_metric: mel_f1
+    mode: max
+    improve_thresh: 1.0e-6
+
+
+loss:
+  name: CrossEntropyLoss
+  params:
+
+
+optimizer:
+  name: AdamW
+  params:
+    lr: 3.0e-4
+    weight_decay: 5.0e-4
+
+
+scheduler:
+  name: CosineAnnealingWarmRestarts
+  params:
+    final_lr: 1.0e-8
+    num_snapshots: 4
+
+
+test:
+  checkpoint: ../checkpoints/skp007/EFFB4_000_VM-0.9312.PTH
+  predictor: Predictor
+  savefile: ../cv-predictions/fold0/skp007.pkl
+  params:

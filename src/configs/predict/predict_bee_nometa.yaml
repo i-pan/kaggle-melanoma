@@ -1,0 +1,18 @@
+# NOTE: it is best to use absolute paths
+# If you must use relative paths, they are relative
+# to run.py, not the config file
+
+seed: 88 
+
+dataset:
+  name: SkinDataset
+  params:
+    flip: false
+    verbose: true
+    square: true
+    square_tta: 10
+  data_dir: ../data/jpeg/test/
+  csv_filename: ../data/test_with_meta.csv
+
+predict:
+  savefile:

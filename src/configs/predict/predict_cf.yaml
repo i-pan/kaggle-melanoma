@@ -1,0 +1,46 @@
+# NOTE: it is best to use absolute paths
+# If you must use relative paths, they are relative
+# to run.py, not the config file
+
+seed: 88 
+
+dataset:
+  name: AlaskaDataset
+  params:
+    flip: false
+    verbose: true
+  data_dir: ../data/Test/
+  cf_csv: ../data/cf.csv
+
+transform:
+  augment: null
+  num_workers: 0
+  pad_ratio: 1.0
+  resize_to: [512, 512]
+  preprocess:
+    image_range: [0, 255]
+    input_range: [0, 1]
+    mean: [0.485, 0.456, 0.406]
+    sdev: [0.229, 0.224, 0.225]
+
+
+model_configs:
+  - {
+    75: configs/marks/mark012.yaml,
+    90: configs/marks/mark014.yaml,
+    95: configs/marks/mark015.yaml
+  }
+
+
+model_checkpoints:
+  - {
+    75: ../checkpoints/mark012/MIX_005_VM-0.9101.PTH,
+    90: ../checkpoints/mark014/MIX_005_VM-0.8795.PTH,
+    95: ../checkpoints/mark015/MIX_005_VM-0.7724.PTH
+  }
+
+
+
+predict:
+  predictor: Predictor
+  save_csvfile: ../predictions/mark012-15.csv 

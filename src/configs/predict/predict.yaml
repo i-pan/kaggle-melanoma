@@ -1,0 +1,63 @@
+# NOTE: it is best to use absolute paths
+# If you must use relative paths, they are relative
+# to run.py, not the config file
+
+seed: 88 
+
+dataset:
+  name: SkinDataset
+  params:
+    flip: false
+    verbose: true
+    square: true
+    square_tta: true
+  data_dir: ../data/jpeg/test/
+
+
+# transform:
+#   augment: null
+#   params:
+#   num_workers: 0
+#   pad_ratio: 0.666667
+#   resize_to: [480, 720]
+#   crop_size: [420, 630]
+#   preprocess:
+#     image_range: [0, 255]
+#     input_range: [0, 1]
+#     mean: [0.485, 0.456, 0.406]
+#     sdev: [0.229, 0.224, 0.225]
+
+
+transform:
+  augment: vanilla_transform
+  params:
+    p: 0.8
+  num_workers: 0
+  pad_ratio: null
+  resize_to: [512, 512]
+  preprocess:
+    image_range: [0, 255]
+    input_range: [0, 1]
+    mean: [0.485, 0.456, 0.406]
+    sdev: [0.229, 0.224, 0.225]
+
+
+model_configs:
+  - configs/skp/skp017.yaml
+  - configs/skp/skp017.yaml
+  - configs/skp/skp017.yaml
+  - configs/skp/skp017.yaml
+  - configs/skp/skp017.yaml
+
+
+model_checkpoints:
+  - ../checkpoints/skp017/fold0/EFFB4_000_VM-0.9224.PTH
+  - ../checkpoints/skp017/fold1/EFFB4_000_VM-0.9127.PTH
+  - ../checkpoints/skp017/fold2/EFFB4_000_VM-0.9372.PTH
+  - ../checkpoints/skp017/fold3/EFFB4_000_VM-0.9319.PTH
+  - ../checkpoints/skp017/fold4/EFFB4_000_VM-0.9221.PTH
+
+
+predict:
+  predictor: Predictor
+  savefile: ../lb-predictions/skp017-5fold.pkl 
