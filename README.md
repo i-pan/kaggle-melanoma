@@ -2,13 +2,10 @@
 
 Environment:
 
-Python 3.7.7
-
-Anaconda 
-
-PyTorch 1.6
-
-4 NVIDIA Quadro RTX 6000 24GB 
+- Python 3.7.7
+- Anaconda 
+- PyTorch 1.6
+- 4 NVIDIA Quadro RTX 6000 24GB 
 
 
 ## Setup Python environment
@@ -82,7 +79,7 @@ bash inference.sh
 
 ## Generate submission
 ```
-cd eval
+cd src/eval
 python generate_sub.py
 ```
 Final submission CSV will be saved within `eval/` directory as `final_submission.csv`.
