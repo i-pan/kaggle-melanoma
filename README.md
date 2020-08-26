@@ -24,6 +24,13 @@ kaggle competitions download -c siim-isic-melanoma-classification
 unzip siim-isic-melanoma-classification.zip 
 ```
 
+## [Optional] Download trained checkpoints
+```
+cd checkpoints
+kaggle datasets download -d vaillant/melanoma-checkpoints
+unzip melanoma-checkpoints.zip
+```
+
 ## Train ISIC 2019 model
 ```
 cd src/etl
